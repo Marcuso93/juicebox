@@ -10,7 +10,6 @@ server.use(morgan('dev'));
 
 require('dotenv').config();
 
-
 const {client} = require('./db');
 
 server.use(express.json());
@@ -21,9 +20,6 @@ server.use('/', (req, res,next) => {
   next()
 })
 
-server.use(morgan('dev'));
-server.use('/api', apiRouter);
-
 server.get('/background/:color', (req, res, next) => {
   res.send(`
     <body style="background: ${ req.params.color };">
@@ -32,13 +28,11 @@ server.get('/background/:color', (req, res, next) => {
   `);
 });
 
-
 server.get('/add/:first/to/:second', (req, res, next) => {
   res.send(`<h1>${ req.params.first } + ${ req.params.second } = ${
     Number(req.params.first) + Number(req.params.second)
    }</h1>`);
 });
-
 
 const PORT = 3000;
 
